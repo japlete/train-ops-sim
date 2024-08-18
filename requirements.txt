@@ -1,0 +1,11 @@
+numpy >= 2.0
+pandas >= 2.2
+scikit-learn >= 1.5
+matplotlib >= 3.9
+tqdm >= 4.66
+torch >= 2.4
+torchinfo >= 1.8
+numba >= 0.60
+icc-rt >= 2020.0.133
+openpyxl >= 3.1
+seaborn >= 0.13
