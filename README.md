@@ -5,18 +5,17 @@ The simulation can output train graphs and also aggregated statistics about cycl
 
 ## Example outputs
 
+*48 hr train graph with 5 highlighted trains and 2 other circuits*
 
 <img src="images/Main line-example.svg" alt="Train graph example" background-color="white" width="1200"/>
 
-*48h train graph with 5 highlighted trains and 2 other circuits*
+*Utilization percentages per track segment*
 
 <img src="images/segment_util-example.svg" alt="Segment utilization example" background-color="white" width="400"/>
 
-*Utilization percentages per track segment*
+*Model training output: average reward per episode*
 
 <img src="images/reward_per_step-example.svg" alt="Reward per step example" background-color="white" width="400"/>
-
-*Model training output: average reward per episode*
 
 ## Instructions
 
@@ -73,7 +72,7 @@ The actor output is a sigmoid that models the action probability, and the critic
 
 The number of parameters depends on the number of trains, circuits and segments, and the hyper-parameters that control hidden layer sizes, embedding sizes and spline knots.
 
-<img src="images/nn_architecture.svg" alt="Actor critic architecture" background-color="white" width="800"/>
+<img src="images/nn_architecture.png" alt="Actor critic architecture" background-color="white" width="800"/>
 
 *Neural net architecture for the example input (9 trains, 3 circuits, 15 segments). Total 62K parameters.*
 
@@ -85,7 +84,7 @@ The objective function combines the critic loss, the actor loss and an entropy t
 
 Adjusting the **hidden layer sizes and embedding sizes** is usually also necessary, depending on the number of trains and segments in your operation.
 
-The discount rate gamma for discounting the future rewards starts by default at 0.95 and increases to 0.998 after 3/4 of the episodes. The rewards are accumulated over an N-step return, where N is the number of simulation steps per gradient step. The default N is 5, which together with the terminal gamma of 0.998 gives a discount factor of 0.998^5 ~ 0.99 for the value of the next state after the 5 steps, which is a common value in RL problems.
+The discount rate gamma for discounting the future rewards starts by default at 0.95 and increases to 0.998 after 3/4 of the episodes. The rewards are accumulated over an **N-step return**, where N is the number of simulation steps per gradient step. The default N is 5, which together with the terminal gamma of 0.998 gives a discount factor of 0.998^5 ~ 0.99 for the value of the next state after the 5 steps, which is a common value in RL problems.
 
 The batch size for each gradient step is set to the number of threads times the number of replicas per thread. The default replicas per thread is 32. The testing of the model was done with 12 threads, which yields a batch size of 384.
 
